@@ -1,0 +1,51 @@
+<div class="flex justify-center items-center mt-6">
+    <form class="bg-white/[0.7] border border-white/[0.5] p-6 rounded-lg shadow-md w-[60%]" #detailsForm="ngForm"
+        (submit)="submitForm(detailsForm)">
+        <p class="text-xl font-semibold">Add Course</p>
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input id="name" name="name" #name="ngModel" required [(ngModel)]="model.name" type="text"
+                placeholder="Enter your name"
+                class="mt-1 px-2 block w-full h-10 border rounded border-gray-300 shadow-sm focus:ring-black focus:border-black outline-none" />
+            <p *ngIf="name.invalid && name.touched" class="text-red-500 text-sm mt-1">
+                Name is required.
+            </p>
+        </div>
+        <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea id="description" name="description" #description="ngModel" required
+                [(ngModel)]="model.description" type="text" placeholder="Enter your description"
+                class="mt-1 px-2 block w-full min-h-20 max-h-40 border rounded border-gray-300 shadow-sm focus:ring-black focus:border-black outline-none"></textarea>
+            <p *ngIf="description.invalid && description.touched" class="text-red-500 text-sm mt-1">
+                Description is required.
+            </p>
+        </div>
+        <div>
+            <label for="image" class="block text-sm font-medium text-gray-700">Choose an image:</label>
+            <input type="file" id="image" name="image" accept="image/*" [multiple]="false"
+                (change)="onFileSelected($event)" ngModel required
+                class="mt-1 px-2 block w-full h-10 border rounded border-gray-300 shadow-sm focus:ring-black focus:border-black outline-none" />
+            @if(imgError) {
+            <p class="text-red-500 text-sm mt-1">
+                Image is required.
+            </p>
+            }
+        </div>
+        <div *ngIf="selectedImage" class="mt-4">
+            <p class="text-sm text-gray-700">Preview:</p>
+            <img [src]="imagePreview" alt="Selected image" class="mt-2 w-20 h-auto border rounded" />
+        </div>
+        <button type="submit" class="w-full mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
+            Submit
+        </button>
+    </form>
+</div>
+<div class="w-full h-auto px-10 grid gap-4 grid-cols-4 my-10">
+    @for(course of courses; track $index){
+    <app-course-card [course]="course"></app-course-card>
+    } @empty {
+    <div class="col-span-4 flex items-center justify-center text-red-300 h-20">
+        No courses added yet!
+    </div>
+    }
+</div>

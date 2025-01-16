@@ -1,0 +1,10 @@
+<div class="w-full h-60 flex items-center justify-center text-2xl font-medium font-serif">Welcome to Angular App</div>
+<div class="w-full h-auto px-10 grid gap-4 grid-cols-4 mb-20">
+    @for(course of courses; track $index){
+    <app-course-card [course]="course"></app-course-card>
+    } @empty {
+        <div class="col-span-4 flex items-center justify-center text-red-300 h-20">
+            No courses found
+        </div>
+    }
+</div>

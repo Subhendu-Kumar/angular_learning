@@ -1,0 +1,7 @@
+<div class="w-full h-80 bg-gray-50 border p-2 border-gray-200 rounded-lg flex items-start flex-col justify-start gap-3">
+    <div class="w-full h-40 border border-gray-100 rounded-md bg-green-50 overflow-hidden">
+        <img [src]="course.imgUrl" alt="" class="w-full h-full object-cover object-center">
+    </div>
+    <p class="text-lg font-medium">{{ getTruncatedText(course?.name, 7) }}</p>
+    <p class="text-sm font-normal text-gray-400">{{ getTruncatedText(course?.description, 15) }}</p>
+</div>
