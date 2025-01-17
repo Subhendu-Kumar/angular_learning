@@ -1,1 +1,13 @@
-<p>projects works!</p>
+<div class="w-full h-auto py-4 px-4">
+    <h1 class="text-lg font-semibold">Your projects</h1>
+    <div class="mt-6 w-full h-auto grid grid-cols-4 gap-3">
+        <div *ngFor="let project of projects"
+            class="w-full h-auto flex flex-col items-start justify-start py-2 px-3 bg-purple-100 rounded-md shadow-md relative">
+            <p>{{ project.name }}</p>
+            <p>{{ project.description }}</p>
+            <a class="absolute top-2 right-3 bg-red-400 rounded-md text-xs p-1" [routerLink]="['edit', project.id]">
+                edit
+            </a>
+        </div>
+    </div>
+</div>

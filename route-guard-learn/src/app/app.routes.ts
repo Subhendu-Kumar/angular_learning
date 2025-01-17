@@ -34,11 +34,38 @@ export const routes: Routes = [
       },
       {
         path: 'projects',
-        loadComponent: () =>
-          import('./pages/dashboard/projects/projects.component').then(
-            (c) => c.ProjectsComponent
-          ),
+        data: { role: 'MANAGER' },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./pages/dashboard/projects/projects.component').then(
+                (c) => c.ProjectsComponent
+              ),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import(
+                './pages/dashboard/projects/edit-project/edit-project.component'
+              ).then((c) => c.EditProjectComponent),
+          },
+        ],
       },
     ],
+  },
+  {
+    path: 'settings',
+    loadComponent: () =>
+      import('./pages/settings/settings.component').then(
+        (c) => c.SettingsComponent
+      ),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./pages/not-exist/not-exist.component').then(
+        (c) => c.NotExistComponent
+      ),
   },
 ];
