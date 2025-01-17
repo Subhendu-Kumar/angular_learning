@@ -1,0 +1,27 @@
+<div class="w-full h-screen flex">
+    <div class="w-[18%] h-full bg-zinc-50 p-3 flex flex-col items-start justify-start">
+        <div class="flex items-center justify-start w-full h-auto gap-3">
+            <img src="favicon.ico" alt="logoi" class="w-8 h-8">
+            <p class="text-xl font-semibold">Dashboard</p>
+        </div>
+        <div class="w-full h-auto mt-6 flex items-start justify-start flex-col gap-2">
+            <a *ngFor="let item of nav_item" [class.bg-blue-200]="isActive(item.link)"
+                [class.hover:bg-blue-50]="!isActive(item.link)"
+                class="text-lg text-gray-500 font-semibold capitalize w-full h-8 rounded-md px-2"
+                [routerLink]="item.link">{{ item.name }}</a>
+        </div>
+    </div>
+    <div class="w-full h-full">
+        <div class="w-full h-14 bg-zinc-50 flex items-center justify-between px-4">
+            <p class="text-lg font-semibold">Welcome to dashboard</p>
+            <button
+                class="px-3 py-2 text-sm font-semibold bg-black hover:bg-black/[0.9] rounded-md text-white shadow-lg"
+                (click)="signOut()">
+                Sign Out
+            </button>
+        </div>
+        <div class="w-full h-[calc(100vh-56px)] overflow-y-scroll">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
