@@ -1,4 +1,8 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth/auth.guard';
+import { roleGuard } from './guards/role/role.guard';
+import { unsavedChangesGuard } from './guards/unsaved-changes/unsaved-changes.guard';
+import { adminOnlyGuard } from './guards/admin-only/admin-only.guard';
 
 export const routes: Routes = [
   {
@@ -17,6 +21,7 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard.component').then(
         (c) => c.DashboardComponent
       ),
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -34,6 +39,7 @@ export const routes: Routes = [
       },
       {
         path: 'projects',
+        canActivateChild: [roleGuard],
         data: { role: 'MANAGER' },
         children: [
           {
@@ -49,6 +55,7 @@ export const routes: Routes = [
               import(
                 './pages/dashboard/projects/edit-project/edit-project.component'
               ).then((c) => c.EditProjectComponent),
+            canDeactivate: [unsavedChangesGuard],
           },
         ],
       },
@@ -60,6 +67,7 @@ export const routes: Routes = [
       import('./pages/settings/settings.component').then(
         (c) => c.SettingsComponent
       ),
+    canMatch: [adminOnlyGuard],
   },
   {
     path: '**',

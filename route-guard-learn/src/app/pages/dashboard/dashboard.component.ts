@@ -10,7 +10,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
   nav_item = navItems;
@@ -26,10 +26,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    const isLoggedIn = !!localStorage.getItem('currentUser');
-    if (!isLoggedIn) {
-      this.auth.navigateByURL('/login');
-    }
-  }
+  // ngOnInit(): void {
+  //   const isLoggedIn = !!localStorage.getItem('currentUser');
+  //   if (!isLoggedIn) {
+  //     this.auth.navigateByURL('/login');
+  //   }
+  // }
 }
